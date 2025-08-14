@@ -69,7 +69,6 @@ namespace PradeepTech.Auth.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleIdFk = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -80,12 +79,6 @@ namespace PradeepTech.Auth.API.Migrations
                     table.ForeignKey(
                         name: "FK_RoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleClaims_Roles_RoleIdFk",
-                        column: x => x.RoleIdFk,
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -206,10 +199,10 @@ namespace PradeepTech.Auth.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "DateCreated", "Description", "IsActive", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", null, new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8039), "Full system access", true, "SuperAdmin", "SUPERADMIN" },
-                    { "2", null, new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8536), "Administrative access", true, "Admin", "ADMIN" },
-                    { "3", null, new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8551), "Management level access", true, "Manager", "MANAGER" },
-                    { "4", null, new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8555), "Standard user access", true, "User", "USER" }
+                    { "1", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6032), "Full system access", true, "SuperAdmin", "SUPERADMIN" },
+                    { "2", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6582), "Administrative access", true, "Admin", "ADMIN" },
+                    { "3", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6600), "Management level access", true, "Manager", "MANAGER" },
+                    { "4", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6605), "Standard user access", true, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -221,11 +214,6 @@ namespace PradeepTech.Auth.API.Migrations
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleClaims_RoleIdFk",
-                table: "RoleClaims",
-                column: "RoleIdFk");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

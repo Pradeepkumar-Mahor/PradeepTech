@@ -5,6 +5,8 @@ namespace PradeepTech.Auth.API.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string UserId { get; set; } // Or Guid, int, etc.
+
         [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }

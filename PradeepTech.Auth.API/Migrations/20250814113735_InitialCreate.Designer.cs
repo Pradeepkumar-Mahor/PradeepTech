@@ -12,7 +12,7 @@ using PradeepTech.Auth.API.Context;
 namespace PradeepTech.Auth.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250814103116_InitialCreate")]
+    [Migration("20250814113735_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -132,7 +132,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "1",
-                            DateCreated = new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8039),
+                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6032),
                             Description = "Full system access",
                             IsActive = true,
                             Name = "SuperAdmin",
@@ -141,7 +141,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "2",
-                            DateCreated = new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8536),
+                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6582),
                             Description = "Administrative access",
                             IsActive = true,
                             Name = "Admin",
@@ -150,7 +150,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "3",
-                            DateCreated = new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8551),
+                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6600),
                             Description = "Management level access",
                             IsActive = true,
                             Name = "Manager",
@@ -159,7 +159,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "4",
-                            DateCreated = new DateTime(2025, 8, 14, 10, 31, 16, 334, DateTimeKind.Utc).AddTicks(8555),
+                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6605),
                             Description = "Standard user access",
                             IsActive = true,
                             Name = "User",
@@ -185,15 +185,9 @@ namespace PradeepTech.Auth.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
 
                     b.ToTable("RoleClaims", (string)null);
                 });
@@ -351,15 +345,9 @@ namespace PradeepTech.Auth.API.Migrations
 
             modelBuilder.Entity("PradeepTech.Auth.API.Models.ApplicationRoleClaim", b =>
                 {
-                    b.HasOne("PradeepTech.Auth.API.Models.ApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PradeepTech.Auth.API.Models.ApplicationRole", "Role")
                         .WithMany("RoleClaims")
-                        .HasForeignKey("RoleId1")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

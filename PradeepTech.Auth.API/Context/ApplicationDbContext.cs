@@ -40,6 +40,18 @@ namespace PradeepTech.Auth.API.Context
                     .IsRequired();
             });
 
+            builder.Entity<ApplicationRoleClaim>()
+                .HasOne(arc => arc.Role)
+                .WithMany(r => r.RoleClaims)
+                .HasForeignKey(arc => arc.RoleId)
+                .IsRequired();
+
+            //builder.Entity<UserClaim>()
+            //    .HasOne(uc => uc.User)
+            //    .WithMany(u => u.UserClaims)
+            //    .HasForeignKey(uc => uc.UserId)
+            //    .IsRequired();
+
             // Seed default roles
             SeedRoles(builder);
 

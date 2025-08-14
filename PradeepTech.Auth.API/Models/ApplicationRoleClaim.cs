@@ -6,6 +6,10 @@ namespace PradeepTech.Auth.API.Models
     {
         public int Id { get; set; }
 
-        public virtual ApplicationRole Role { get; set; }
+        public string RoleId { get; set; } // Ensure this matches the PK type of ApplicationRole
+
+        public ApplicationRole Role { get; set; }
+
+        // public virtual ApplicationRole Role { get; set; }
     }
 }
