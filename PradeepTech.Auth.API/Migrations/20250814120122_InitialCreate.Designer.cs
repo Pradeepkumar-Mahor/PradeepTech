@@ -12,7 +12,7 @@ using PradeepTech.Auth.API.Context;
 namespace PradeepTech.Auth.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250814113735_InitialCreate")]
+    [Migration("20250814120122_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,8 +44,6 @@ namespace PradeepTech.Auth.API.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
 
@@ -132,7 +130,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "1",
-                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6032),
+                            DateCreated = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Full system access",
                             IsActive = true,
                             Name = "SuperAdmin",
@@ -141,7 +139,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "2",
-                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6582),
+                            DateCreated = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Administrative access",
                             IsActive = true,
                             Name = "Admin",
@@ -150,7 +148,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "3",
-                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6600),
+                            DateCreated = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Management level access",
                             IsActive = true,
                             Name = "Manager",
@@ -159,7 +157,7 @@ namespace PradeepTech.Auth.API.Migrations
                         new
                         {
                             Id = "4",
-                            DateCreated = new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6605),
+                            DateCreated = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Standard user access",
                             IsActive = true,
                             Name = "User",
@@ -307,22 +305,9 @@ namespace PradeepTech.Auth.API.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>");
 
-                    b.Property<string>("UserId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("PradeepTech.Auth.API.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -383,7 +368,7 @@ namespace PradeepTech.Auth.API.Migrations
 
                     b.HasOne("PradeepTech.Auth.API.Models.ApplicationUser", "User")
                         .WithMany("UserClaims")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

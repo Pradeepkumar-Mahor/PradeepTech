@@ -174,8 +174,7 @@ namespace PradeepTech.Auth.API.Migrations
                 name: "UserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,12 +185,6 @@ namespace PradeepTech.Auth.API.Migrations
                         principalTable: "AspNetUserClaims",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserClaims_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -199,10 +192,10 @@ namespace PradeepTech.Auth.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "DateCreated", "Description", "IsActive", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6032), "Full system access", true, "SuperAdmin", "SUPERADMIN" },
-                    { "2", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6582), "Administrative access", true, "Admin", "ADMIN" },
-                    { "3", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6600), "Management level access", true, "Manager", "MANAGER" },
-                    { "4", null, new DateTime(2025, 8, 14, 11, 37, 34, 947, DateTimeKind.Utc).AddTicks(6605), "Standard user access", true, "User", "USER" }
+                    { "1", null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Full system access", true, "SuperAdmin", "SUPERADMIN" },
+                    { "2", null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrative access", true, "Admin", "ADMIN" },
+                    { "3", null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Management level access", true, "Manager", "MANAGER" },
+                    { "4", null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Standard user access", true, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -221,11 +214,6 @@ namespace PradeepTech.Auth.API.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserClaims_UserId1",
-                table: "UserClaims",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserLogins_UserId",

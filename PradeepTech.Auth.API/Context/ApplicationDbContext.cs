@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using PradeepTech.Auth.API.Models;
-using System.Reflection.Emit;
 
 namespace PradeepTech.Auth.API.Context
 {
@@ -18,6 +18,12 @@ namespace PradeepTech.Auth.API.Context
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ConfigureWarnings(warnings =>
+                warnings.Ignore(RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -40,17 +46,23 @@ namespace PradeepTech.Auth.API.Context
                     .IsRequired();
             });
 
-            builder.Entity<ApplicationRoleClaim>()
-                .HasOne(arc => arc.Role)
-                .WithMany(r => r.RoleClaims)
-                .HasForeignKey(arc => arc.RoleId)
-                .IsRequired();
+            // Fix for UserClaim → ApplicationUser
+            builder.Entity<UserClaim>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.UserClaims)
+                .HasForeignKey(uc => uc.UserId)
+                .HasPrincipalKey(u => u.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<UserClaim>()
-            //    .HasOne(uc => uc.User)
-            //    .WithMany(u => u.UserClaims)
-            //    .HasForeignKey(uc => uc.UserId)
-            //    .IsRequired();
+            // Fix for ApplicationRoleClaim → ApplicationRole
+            builder.Entity<ApplicationRoleClaim>()
+                .HasOne(rc => rc.Role)
+                .WithMany(r => r.RoleClaims)
+                .HasForeignKey(rc => rc.RoleId)
+                .HasPrincipalKey(r => r.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Seed default roles
             SeedRoles(builder);
@@ -73,28 +85,36 @@ namespace PradeepTech.Auth.API.Context
                     Id = "1",
                     Name = "SuperAdmin",
                     NormalizedName = "SUPERADMIN",
-                    Description = "Full system access"
+                    Description = "Full system access",
+                    DateCreated = new DateTime(2023, 01, 01),
+                    IsActive = true,
                 },
                 new ApplicationRole
                 {
                     Id = "2",
                     Name = "Admin",
                     NormalizedName = "ADMIN",
-                    Description = "Administrative access"
+                    Description = "Administrative access",
+                    DateCreated = new DateTime(2023, 01, 01),
+                    IsActive = true,
                 },
                 new ApplicationRole
                 {
                     Id = "3",
                     Name = "Manager",
                     NormalizedName = "MANAGER",
-                    Description = "Management level access"
+                    Description = "Management level access",
+                    DateCreated = new DateTime(2023, 01, 01),
+                    IsActive = true,
                 },
                 new ApplicationRole
                 {
                     Id = "4",
                     Name = "User",
                     NormalizedName = "USER",
-                    Description = "Standard user access"
+                    Description = "Standard user access",
+                    DateCreated = new DateTime(2023, 01, 01),
+                    IsActive = true,
                 }
             );
         }
