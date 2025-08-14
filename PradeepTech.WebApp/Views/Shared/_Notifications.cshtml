@@ -1,0 +1,121 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function initToastrMessage() {
+
+        let results = $($(".modal.show").find("#results"));
+        let msg = "";
+        if (!results)
+            results = $("#results");
+
+        if (results)
+            msg = $(results).text();
+
+        // let msg = $($(".modal.show").find("#results")).text();
+        // if (!msg){
+        //     msg = $("#results").text();
+        // }
+
+        if (msg)
+            msg = $.parseJSON(msg);
+        else
+            msg = @(TempData["Message"] != null ? Html.Raw(TempData["Message"]) : Html.Raw("undefined"));
+
+
+
+        //console.log('1');
+
+        /*
+        if (typeof(msg) == "undefined") {
+
+            $(".modal, .show > results").text()
+
+            //console.log('2');
+
+            var results = $($(".modal.show").find("#results")).text().length > 0 ? $($(".modal.show").find("#results")).text() : $("#results").text().length > 0 ? $("#results").text() : undefined;
+
+            if (results) {
+                msg = $.parseJSON(results);
+            }
+        }
+        */
+        if (typeof (msg) != "undefined") {
+
+            return showToastrMessage(msg);
+        }
+    }
+    function showToastrMessage(pMsg) {
+        if (pMsg) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "500",
+                "timeOut": "3000",
+                "extendedTimeOut": "500",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr[pMsg.type](pMsg.message, pMsg.title);
+            return pMsg;
+        }
+    }
+
+    function notify(pMsgType, pMessage, pTitle) {
+        var objMsg = {
+            type: pMsgType,
+            message: pMessage,
+            title: pTitle
+        };
+        showToastrMessage(objMsg);
+    }
+</script>
+@*
+<script>
+      initToastrMessage();
+    function initToastrMessage() {
+         let msg = @(TempData["Message"] != null ? Html.Raw(TempData["Message"]) : Html.Raw("undefined"));
+        if (typeof (msg) != "undefined") {
+            return showToastrMessage(msg);
+        }
+    }
+    function showToastrMessage(pMsg) {
+        if (pMsg) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "330",
+                "hideDuration": "500",
+                "timeOut": "3000",
+                "extendedTimeOut": "500",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr[pMsg.type](pMsg.message, pMsg.title);
+            return pMsg;
+        }
+    }
+
+    function notify(pMsgType, pMessage, pTitle) {
+        var objMsg = {
+            type: pMsgType,
+            message: pMessage,
+            title: pTitle
+        };
+        showToastrMessage(objMsg);
+    }
+</script> *@

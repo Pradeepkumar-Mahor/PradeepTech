@@ -1,0 +1,6 @@
+@PradeepTech.API_HostAddress = http://localhost:5118
+
+GET {{PradeepTech.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

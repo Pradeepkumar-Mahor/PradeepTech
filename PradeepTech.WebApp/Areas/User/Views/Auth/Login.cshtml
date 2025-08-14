@@ -1,0 +1,63 @@
+﻿@model PradeepTech.WebApp.Areas.User.Models.LoginModel
+@Html.AntiForgeryToken()
+@{
+ <div class="row pt-4 mt-4">
+        <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card card-outline card-primary  border shadow">
+                    <div class="card-header text-center">
+                    <a href="#" class="h1"><b>Digital Service Request</b></a>
+                    </div>
+                    <div class="card-body">
+                        <p class="login-box-msg h5">
+                            Have a Good Day !!!
+                        </p>
+                        <form id="account" method="post">
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-shield"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="Username / Email-Id / Mobile No." />
+                            </div>
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-lock"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Password" class="form-control" type="password" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                            <div class="row ">
+                            <hr />
+                                <div class="col-4 col-sm-12">
+                                    <button id="login-submit" type="submit" class="btn btn-primary btn-block"> Sign In </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        <div class="col-3"></div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        function localScript() {
+            initSelect2();
+        }
+
+    </script>
+}
+
+

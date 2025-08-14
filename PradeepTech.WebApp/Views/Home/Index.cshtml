@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        @*         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+    *@
+        <li class="breadcrumb-item active" aria-current="page">Masters</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header  ">
+                    <h5>User Management</h5>
+                    <span class="f-14 f-w-700" style="float: right;"> &#10148; </span>
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("UserIndex", "Home", new { Area = "Masters" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header  ">
+                    <h5>Assesses </h5>
+                    <span class="f-14 f-w-700" style="float: right;"> &#10148; </span>
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("AssessesIndex", "Home", new { Area = "Masters" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header ">
+                    <h5>Products</h5>
+                    <span class="f-14 f-w-700" style="float: right;"> &#10148; </span>
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("ProductIndex", "Home", new { Area = "Masters" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
