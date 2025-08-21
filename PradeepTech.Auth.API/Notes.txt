@@ -1,0 +1,68 @@
+﻿
+// JavaScript/TypeScript example for consuming the API
+/*
+class AuthService {
+    private baseUrl = 'https://localhost:7000/api';
+    private token: string | null = localStorage.getItem('token');
+
+    async login(email: string, password: string): Promise<any> {
+        const response = await fetch(`${this.baseUrl}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password, rememberMe: false })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            this.token = data.token;
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('refreshToken', data.refreshToken);
+            return data;
+        }
+
+        throw new Error('Login failed');
+    }
+
+    async register(userData: any): Promise<any> {
+        const response = await fetch(`${this.baseUrl}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (response.ok) {
+            return await response.json();
+        }
+
+        throw new Error('Registration failed');
+    }
+
+    async getProfile(): Promise<any> {
+        const response = await fetch(`${this.baseUrl}/users/profile`, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`
+            }
+        });
+
+        if (response.ok) {
+            return await response.json();
+        }
+
+        throw new Error('Failed to get profile');
+    }
+
+    logout(): void {
+        this.token = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+    }
+
+    isAuthenticated(): boolean {
+        return !!this.token;
+    }
+}
+*/
