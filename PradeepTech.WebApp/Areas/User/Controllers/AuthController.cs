@@ -23,6 +23,7 @@ namespace PradeepTech.WebApp.Areas.User.Controllers
             _logger = logger;
         }
 
+        //New Ad
         public ActionResult Index()
         {
             return View();
